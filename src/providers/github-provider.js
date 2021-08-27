@@ -1,6 +1,6 @@
 import React, {createContext, useState} from 'react';
 
-export const GithubContest = createContext({
+export const GithubContext = createContext({
     user:{
         
     },
@@ -8,7 +8,7 @@ export const GithubContest = createContext({
     starred: [],
 });
 
-const GithubProvider = ({props}) => {
+const GithubProvider = ({children}) => {
     const [githubState, setGithubState] = useState({ 
         user:{
             login: undefined,
@@ -26,13 +26,13 @@ const GithubProvider = ({props}) => {
         starred: [],
     });
     const contextValue = {
-            githubState
-    }
+         githubState,
+    };
     return(
        
-        <GithubProvider.Provider value={contextValue}> 
-           
-        </GithubProvider.Provider>
+        <GithubContext.Provider value={contextValue}> 
+        {children}
+        </GithubContext.Provider>
     )
 }
 

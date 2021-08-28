@@ -1,19 +1,27 @@
 import React from 'react';
 import {Layout, Profile, Repositories} from './Components';
-import { ResetCSS } from './global/resetCSS';
-import GithubProvider from './providers/github-provider';
+import NoSearch from './Components/no-search';
+import useGithub from './Hooks/github-hooks';
 
 const App = () => {
+  const {githubState} = useGithub();
+
+// Adicionar animação de carregando
+
   return (
-    <main>
-      <GithubProvider>
-        <ResetCSS/>
         <Layout>
-          <Profile/>
-          <Repositories/>
+         {githubState.hasUser? (
+            <>
+              {githubState.loading ? (<p>Loading</p>) : (
+                <> 
+                  <Profile/>
+                  <Repositories/>
+                </>
+              )}
+            </>):(
+            <NoSearch/>
+            )}
         </Layout>
-      </GithubProvider>
-    </main>
   );
 }
 

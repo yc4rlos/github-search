@@ -37,7 +37,7 @@ export const WrapperStatusCount = styled.div`
     }
 `;
 
-export const WrapperUsername = styled.div`
+export const WrapperUserGeneric = styled.div`
     display: flex;
     align-items: center;
     margin-top: 8px;
@@ -47,7 +47,7 @@ export const WrapperUsername = styled.div`
     a{
         
         font-size: 14px;
-        color: blue;
+        color: #0645AD;
         font-weight: bold;
     }
 `;

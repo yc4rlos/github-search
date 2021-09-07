@@ -15,7 +15,7 @@ export const sButton = styled(Button)`
 `;
 
 export const sTextField = styled(TextField)`
-    width:94%;
+    width:93%;
     &.focused{
         border: 1px solid #12824C !important;
     }

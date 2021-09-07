@@ -1,11 +1,19 @@
 import React from 'react';
-import * as S from './styled';
+import Lottie from 'react-lottie';
+import animationData from '../../assets/animation.json';
 
 const NoSearch = () => {
+    const defaultOptions = {
+        loop: true,
+        autoplay: true,
+        animationData: animationData,
+        rendererSettings: {
+            preserveAspectRatio: 'xMidYMid slice'
+        }
+    };
+
     return(
-        <S.Wrapper>
-            <p>Nenhum usuário pesquisado.</p>
-        </S.Wrapper>
+        <Lottie options={defaultOptions} height={400} width={450}/>
     );
 };
 

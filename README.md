@@ -1,3 +1,8 @@
+# Tecnologies
+React JS, Axios , React Lottie, React Tabs, Styled Components, Material Ui.
+
+
+
 # Install
 
 After clone this repository, install it dependencies with this command:

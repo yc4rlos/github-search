@@ -2,7 +2,24 @@ import React, {useEffect, useState} from "react";
 import * as S from './styled';
 import { RepositoryItem } from "../index";
 import useGithub from "../../Hooks/github-hooks";
-import { Grid } from "@material-ui/core";
+import { Grid, Tab, Tabs } from "@material-ui/core";
+
+
+var TabPanel = (props) => {
+    const {children, index, value} = props;
+    return(
+        <>
+        {value === index && (
+            <div>
+                {children}
+            </div>
+        )}
+        </>
+    )
+    
+};
+
+
 
 const Repositories = () => {
     const {githubState, getUserRepos, getUserStarred} = useGithub();
@@ -16,41 +33,51 @@ const Repositories = () => {
         setHasUserForSearchRepos(githubState.repositories);
     }, [githubState.user.login]);
 
+    const [value, setValue] = useState(0);
+
+    const handleChange = (e, value) => {
+        setValue(value);
+    }
+
     return (
         <>
         {hasUserForSearchRepos? (
-            <S.Stabs selectedTabClassName="is-selected" selectedTabPanelClassName="is-selected">
-                <S.StabList>
-                    <S.Stab>Repositories</S.Stab>
-                    <S.Stab>Starred</S.Stab>
-                </S.StabList>
-                <S.StabList>
-                    <S.StabPanel>
+            <div>
+                <S.TabBox>
+                    <Tabs value={value} onChange={handleChange} textColor="primary" indicatorColor="primary">
+                        <Tab label="Repositories"></Tab>
+                        <Tab label="Starred"></Tab>
+                    </Tabs>
+                </S.TabBox>
+                    <TabPanel value={value} index={0}>
+                        <S.WrapperList>
+                                <Grid container spacing={3}>
+                                {githubState.repositories.map((item) => (
+                                    <RepositoryItem 
+                                    key={item.id} 
+                                    name={item.name} 
+                                    linkToRepo={item.html_url} 
+                                    fullname={item.full_name}/>
+                                ))}
+                                </Grid>
+                        </S.WrapperList>
+                    </TabPanel>
+                    
+                    <TabPanel value={value} index={1}>
                         <S.WrapperList>
                             <Grid container spacing={3}>
-                            {githubState.repositories.map((item) => (
-                            <RepositoryItem 
-                            key={item.id} 
-                            name={item.name} 
-                            linkToRepo={item.html_url} 
-                            fullname={item.full_name}/>
+                            {githubState.starred.map((item) => (
+                                <RepositoryItem 
+                                key={item.id} 
+                                name={item.name} 
+                                linkToRepo={item.html_url} 
+                                fullname={item.full_name}/>
                             ))}
                             </Grid>
                         </S.WrapperList>
-                    </S.StabPanel>
-                    <S.StabPanel>
-                    <Grid container spacing={3}>
-                            {githubState.starred.map((item) => (
-                            <RepositoryItem 
-                            key={item.id} 
-                            name={item.name} 
-                            linkToRepo={item.html_url} 
-                            fullname={item.full_name}/>
-                            ))}
-                    </Grid>
-                    </S.StabPanel>
-                </S.StabList>
-            </S.Stabs>
+                    </TabPanel>
+                
+            </div>
         ):(
             <> </>
         )}

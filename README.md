@@ -1,4 +1,4 @@
-# Tecnologies
+# Technologies
 <div>
   <ul>
     <li>React JS</li>

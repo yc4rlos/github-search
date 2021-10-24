@@ -1,5 +1,13 @@
 # Tecnologies
-React JS, Axios , React Lottie, React Tabs, Styled Components, Material Ui.
+<div>
+  <ul>
+    <li>React JS</li>
+    <li>Axios</li>
+    <li>React Lottie</li>
+    <li>Styled Components</li>
+    <li>Material Ui</li>
+  <ul>
+</div>
 
 
 
